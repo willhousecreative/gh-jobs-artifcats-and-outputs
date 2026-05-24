@@ -25,6 +25,14 @@ jobs:
         run: npm ci
       - name: Build website
         run: npm run build
+      # - name: Upload build artifacts
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: | # multiple paths can be specified using a newline
+            dist
+            package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
