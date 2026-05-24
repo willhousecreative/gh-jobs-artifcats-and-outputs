@@ -30,12 +30,19 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
-          path: | # multiple paths can be specified using a newline
+          path:
             dist
-            package.json
+            # dist
+            # package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Get build artifcats
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+      - name: Output contents
+        run: ls
       - name: Deploy
         run: echo "Deploying..."
